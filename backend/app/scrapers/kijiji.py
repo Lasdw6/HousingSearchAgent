@@ -88,7 +88,7 @@ async def _search_kijiji_approach_1(params: Dict) -> List[Dict]:
     # Add random delay
     await asyncio.sleep(random.uniform(1, 3))
     
-    async with httpx.AsyncClient(timeout=30.0, follow_redirects=True) as client:
+    async with httpx.AsyncClient(follow_redirects=True) as client:
         response = await client.get(url, headers=headers)
         
         if response.status_code != 200:
@@ -125,7 +125,7 @@ async def _search_kijiji_approach_2(params: Dict) -> List[Dict]:
     
     await asyncio.sleep(random.uniform(2, 4))
     
-    async with httpx.AsyncClient(timeout=30.0, follow_redirects=True) as client:
+    async with httpx.AsyncClient(follow_redirects=True) as client:
         for url in category_urls:
             try:
                 response = await client.get(url, headers=headers)
@@ -165,7 +165,7 @@ async def _search_kijiji_approach_3(params: Dict) -> List[Dict]:
     
     await asyncio.sleep(random.uniform(3, 5))
     
-    async with httpx.AsyncClient(timeout=30.0, follow_redirects=True) as client:
+    async with httpx.AsyncClient(follow_redirects=True) as client:
         response = await client.get(url, headers=headers)
         
         if response.status_code != 200:

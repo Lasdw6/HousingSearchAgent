@@ -81,7 +81,7 @@ async def _search_rentfaster(params: Dict) -> List[Dict]:
         
         await asyncio.sleep(random.uniform(1, 2))
         
-        async with httpx.AsyncClient(timeout=30.0, follow_redirects=True) as client:
+        async with httpx.AsyncClient(follow_redirects=True) as client:
             response = await client.get(url, headers=headers)
             
             if response.status_code != 200:
@@ -117,7 +117,7 @@ async def _search_rentboard(params: Dict) -> List[Dict]:
         
         await asyncio.sleep(random.uniform(1, 2))
         
-        async with httpx.AsyncClient(timeout=30.0, follow_redirects=True) as client:
+        async with httpx.AsyncClient(follow_redirects=True) as client:
             response = await client.get(url, headers=headers)
             
             if response.status_code != 200:
@@ -153,7 +153,7 @@ async def _search_rentseeker(params: Dict) -> List[Dict]:
         
         await asyncio.sleep(random.uniform(1, 2))
         
-        async with httpx.AsyncClient(timeout=30.0, follow_redirects=True) as client:
+        async with httpx.AsyncClient(follow_redirects=True) as client:
             response = await client.get(url, headers=headers)
             
             if response.status_code != 200:
@@ -189,7 +189,7 @@ async def _search_apartments_com(params: Dict) -> List[Dict]:
         
         await asyncio.sleep(random.uniform(1, 2))
         
-        async with httpx.AsyncClient(timeout=30.0, follow_redirects=True) as client:
+        async with httpx.AsyncClient(follow_redirects=True) as client:
             response = await client.get(url, headers=headers)
             
             if response.status_code != 200:

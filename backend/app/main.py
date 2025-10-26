@@ -5,6 +5,11 @@ import asyncio
 import json
 import logging
 from typing import List, Dict
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
 from .api.search import router as search_router
 from .models import SearchRequest
 from .scrapers.agent import search_with_agent
@@ -123,8 +128,20 @@ async def search_with_agent_with_progress(params: Dict):
         async def progress_callback(message: Dict):
             await broadcast_progress(message)
         
-        # Actually perform the search with progress updates
-        results = await search_with_agent(params, progress_callback=progress_callback)
+        # Use Google Playwright scraper with progress updates for better performance
+        from .scrapers.google_playwright import search_google_playwright
+        
+        # Send progress message
+        await broadcast_progress({
+            "type": "progress",
+            "message": "Starting Google Playwright search with deep search...",
+            "step": "playwright_start",
+            "progress": 10
+        })
+        
+        # Perform the search with progress updates
+        search_result = await search_google_playwright(params, enable_deep_search=True, progress_callback=progress_callback)
+        results = search_result.get('listings', [])
         
         # Send final completion message
         await broadcast_progress({

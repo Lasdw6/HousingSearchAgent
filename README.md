@@ -76,7 +76,7 @@ This MVP focuses on delivering 10 high-quality listings in real time, filtered b
 
 ```bash
 git clone <repository-url>
-cd waterloo-housing-search
+cd housing-search
 ```
 
 2. Set up the backend
@@ -103,7 +103,7 @@ npm run dev
 ## 📁 Project Structure
 
 ```
-waterloo-housing-search/
+housing-search/
 ├── frontend/           # Next.js frontend application
 │   ├── src/
 │   │   ├── app/       # App router pages

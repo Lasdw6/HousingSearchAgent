@@ -30,7 +30,7 @@ async def search_google(params: Dict) -> List[Dict]:
             "Connection": "keep-alive",
             "Upgrade-Insecure-Requests": "1",
         }
-        async with httpx.AsyncClient(timeout=30.0) as client:
+        async with httpx.AsyncClient() as client:
             response = await client.get(url, headers=headers)
             if response.status_code != 200:
                 logger.warning(f"Google returned status {response.status_code}")

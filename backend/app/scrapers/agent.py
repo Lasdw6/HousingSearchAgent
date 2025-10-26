@@ -556,7 +556,7 @@ class HousingSearchAgent:
         """Try a specific search approach"""
         headers = self._get_headers(approach)
         
-        async with httpx.AsyncClient(timeout=30.0, follow_redirects=True) as client:
+        async with httpx.AsyncClient(follow_redirects=True) as client:
             response = await client.get(url, headers=headers)
             
             if response.status_code != 200:
@@ -722,7 +722,11 @@ class HousingSearchAgent:
         """Learn from search results and update memory"""
         # Update source performance
         for result in results:
-            source = result["source"].lower()
+            # Skip if result is not a dictionary
+            if not isinstance(result, dict):
+                continue
+                
+            source = result.get("source", "unknown").lower()
             if source in self.memory.source_performance:
                 self.memory.source_performance[source] += 0.01
             else:

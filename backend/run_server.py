@@ -14,7 +14,7 @@ if __name__ == "__main__":
     print("=" * 50)
     
     uvicorn.run(
-        app,
+        "app.main:app",  # Use import string for reload mode
         host="0.0.0.0",
         port=8000,
         reload=True,  # Auto-reload on code changes
